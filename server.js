@@ -13,9 +13,10 @@ app.use(logger('dev'));
 // app.use(cors());
 
 // mount our routes
-//app.use('/api/users', require('./routes/api/users'));
+app.use('/api/users', require('./routes/api/users'));
 
 const port = process.env.PORT || 3001;
+
 // tell express to listen
 app.listen(port, function () {
     console.log(`Express is listening on port ${port}`);

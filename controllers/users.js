@@ -7,8 +7,6 @@ module.exports = {
     signup
 };
 
-// define a signup controller action
-// create the user document as json
 
 async function signup(req, res) {
     try {
