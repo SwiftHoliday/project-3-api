@@ -14,6 +14,13 @@ const userSchema = new Schema({
     password: String
 }, { timestamps: true });
 
+userSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        delete ret.password
+        return ret;
+    }
+});
+
 userSchema.pre('save', function(next) {
     const user = this;
     if (!user.isModified("password")) return next();
@@ -23,5 +30,9 @@ userSchema.pre('save', function(next) {
         next();
     });
 });
+
+userSchema.methods.comparePassword = function (tryPassword, callback) {
+    bcrypt.compare(tryPassword, this.password, callback)
+}
 
 module.exports = mongoose.model('User', userSchema);
